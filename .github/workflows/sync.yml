@@ -1,0 +1,37 @@
+on:
+  schedule:
+    - cron: "0 22 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+        with:
+          ref: master
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+          git submodule sync --recursive
+          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+      - name: check for changes
+        shell: bash
+        run: git diff-index --quiet HEAD --
+      - name: patch
+        uses: ./patch.sh
+      - name: cd
+        shell: bash
+        run: cd ./wat
+      - name: cargo test
+      - uses: actions-rs/cargo@v1
+        with:
+          command: test
+      - uses: matheusalbino/git-commit@v1.0.1
+        with:
+          user-name: Eliza Weisman
+          user-email: eliza@elizas.website
+          message: update wast
+          github-token: ${{ secrets.GITHUB_TOKEN }}
