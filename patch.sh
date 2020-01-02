@@ -1,8 +1,11 @@
-#! /usr/bin/bash
+#! /bin/bash
 set -eux
-git apply p.patch
 
-for file in wat/crates/wast/**/*.rs ; do
+cd wat
+
+patch -p1 < ../wast.patch
+
+for file in crates/wast/**/*.rs ; do
   cat $file | sed "s/std::/crate::stdlib::/" > /tmp/newfile
   mv /tmp/newfile $file
 done

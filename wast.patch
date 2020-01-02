@@ -1,5 +1,5 @@
 diff --git a/crates/wast/Cargo.toml b/crates/wast/Cargo.toml
-index 3ce9a0b..e630a50 100644
+index 3ce9a0b..4704477 100644
 --- a/crates/wast/Cargo.toml
 +++ b/crates/wast/Cargo.toml
 @@ -1,19 +1,20 @@
@@ -14,8 +14,8 @@ index 3ce9a0b..e630a50 100644
 -repository = "https://github.com/bytecodealliance/wat/tree/master/crates/wast"
 -homepage = "https://github.com/bytecodealliance/wat/tree/master/crates/wast"
 -documentation = "https://docs.rs/wast"
-+repository = "https://github.com/hawkw/mycelium-wat/tree/master/crates/wast"
-+homepage = "https://github.com/hawkw/mycelium-wat/tree/master/crates/wast"
++repository = "https://github.com/hawkw/mycelium-wat/tree/master/wat/crates/wast"
++homepage = "https://github.com/hawkw/mycelium-wat/tree/master/wat/crates/wast"
 +documentation = "https://docs.rs/mycelium-wast"
  description = """
  Customizable Rust parsers for the WebAssembly Text formats WAT and WAST
@@ -54,14 +54,14 @@ index e099974..440768f 100644
  /// this crate.
 diff --git a/crates/wast/src/stdlib.rs b/crates/wast/src/stdlib.rs
 new file mode 100644
-index 0000000..23b2457
+index 0000000..d8d23b3
 --- /dev/null
 +++ b/crates/wast/src/stdlib.rs
 @@ -0,0 +1,56 @@
 +//! Re-exports either the Rust `std` library or `core` and `alloc` when `std` is
 +//! disabled.
 +//!
-+//! `crate::stdlib::...` should be used rather than `std::` when adding code that
++//! `crate::stdlib::...` should be used rather than `crate::stdlib::` when adding code that
 +//! will be available with the standard library disabled.
 +//!
 +//! Note that this module is called `stdlib` rather than `std`, as Rust 1.34.0
