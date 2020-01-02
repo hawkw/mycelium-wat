@@ -18,12 +18,12 @@ jobs:
           auth_header="$(git config --local --get http.https://github.com/.extraheader)"
           git submodule sync --recursive
           git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
-      - name: patch
-        shell: bash
-        run: ./patch.sh
       - name: cd
         shell: bash
         run: cd ./wat
+      - name: patch
+        shell: bash
+        run: ../patch.sh
       - name: cargo test
         uses: actions-rs/cargo@v1
         with:

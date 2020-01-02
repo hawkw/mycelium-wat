@@ -20,16 +20,19 @@ jobs:
       - name: check for changes
         shell: bash
         run: git diff-index --quiet HEAD --
-      - name: patch
-        shell: bash
-        run: ./patch.sh
       - name: cd
         shell: bash
         run: cd ./wat
+      - name: patch
+        shell: bash
+        run: ../patch.sh
       - name: cargo test
         uses: actions-rs/cargo@v1
         with:
           command: test
+      - name: cd
+        shell: bash
+        run: cd ..
       - uses: matheusalbino/git-commit@v1.0.1
         with:
           user-name: Eliza Weisman
