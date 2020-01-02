@@ -22,16 +22,12 @@ jobs:
         run: git diff-index --quiet HEAD --
       - name: patch
         shell: bash
-        run: ../patch.sh
-        working-directory: ./wat
+        run: ./patch.sh
       - name: cargo test
         uses: actions-rs/cargo@v1
         with:
           command: test
           args: -p mycelium-wast --manifest-path wat/Cargo.toml
-      - name: cd
-        shell: bash
-        run: cd ..
       - uses: matheusalbino/git-commit@v1.0.1
         with:
           user-name: Eliza Weisman

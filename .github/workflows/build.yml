@@ -20,8 +20,7 @@ jobs:
           git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
       - name: patch
         shell: bash
-        run: ../patch.sh
-        working-directory: ./wat
+        run: ./patch.sh
       - name: cargo test
         uses: actions-rs/cargo@v1
         with:
