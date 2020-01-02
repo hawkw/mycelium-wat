@@ -27,7 +27,7 @@ jobs:
         shell: bash
         run: cd ./wat
       - name: cargo test
-      - uses: actions-rs/cargo@v1
+        uses: actions-rs/cargo@v1
         with:
           command: test
       - uses: matheusalbino/git-commit@v1.0.1
